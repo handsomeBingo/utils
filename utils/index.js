@@ -55,7 +55,6 @@ var RunSeconds = function (timerObj) {
     };
 };
 
-// example depend on jQuery
 var isRun = {
     countFrom: 11,
     callback: function (currentSecond) {
@@ -76,20 +75,18 @@ $('#codeSendBtn1').click(function () {
         // By the way, you can do something with the stat that the counter sample tells you;
         // For example, you want to shut the counter,when the ajax http status returns error, you can do it in the ajax callback by timer.shutdown() ,'cause the counter record the state
         /*setTimeout(function () {
-         if (timer.timer) {
-         timer.shutDown();
-         $('#codeSendBtn1').text('发送验证码').attr('disabled', false)
-         }
-         }, 4000)*/
+            if (timer.timer) {
+                timer.shutDown();
+                $('#codeSendBtn1').text('发送验证码').attr('disabled', false)
+            }
+        }, 4000)*/
     } else {
         return false
     }
 })
 
-// calculate rem for rem layout
 (function (win, doc) {
     var t = null, l, w;
-
     function changeRem() {
         w = doc.getBoundingClientRect().width;
         if (l === w) {
@@ -106,7 +103,6 @@ $('#codeSendBtn1').click(function () {
         doc.style.fontSize = win.rem + 'px';
         doc.setAttribute('data-num', win.rem);
     }
-
     changeRem();
     win.addEventListener('reisize', function () {
         if (document.activeElement.tagName != 'INPUT' || document.activeElement.tagName != 'TEXTAREA') {
@@ -118,4 +114,26 @@ $('#codeSendBtn1').click(function () {
         clearTimeout(t);
         t = setTimeout(changeRem, 100);
     })
-})(window, document.documentElement)
+})()
+
+var isString = function (source) {
+    return typeof source === 'string'
+}
+var camelToInline = function (source) {
+    return typeof source === 'string' ? source.replace(/([A-Z])/g, '-' + '$1').toLocaleLowerCase() : 'not string'
+};
+
+var inlineToCamel = function (source) {
+    return  source.replace(/(-[a-z])/g, function (a, b) {return b.slice(1).toUpperCase()})
+};
+
+var getQueryParams = function (href) {
+    var url = href.slice(href.indexOf('?'));
+    var obj = {};
+    var matches = url.match(/([^?&=\s]+)=?([^?&=\s]+)?/g) || [];
+    matches.forEach(function (item) {
+        var a = item.split('=');
+        obj[a[0]] = a[1];
+    });
+    return obj
+};
