@@ -71,7 +71,7 @@ var timer = new RunSeconds(isRun);
 $('#codeSendBtn1').click(function () {
     if (!timer.isRunning) {
         timer.start();
-        // you may process some sync operations,like ajax,timeOut etc.
+        // you may process some async operations,like ajax,timeOut etc.
         // By the way, you can do something with the stat that the counter sample tells you;
         // For example, you want to shut the counter,when the ajax http status returns error, you can do it in the ajax callback by timer.shutdown() ,'cause the counter record the state
         /*setTimeout(function () {
@@ -136,4 +136,34 @@ var getQueryParams = function (href) {
         obj[a[0]] = a[1];
     });
     return obj
+};
+
+// get the longest prefix of a string Array ['flow', 'flex', 'flower'] => "fl"
+var longestPrefix = function (arr) {
+    var canPush =function (arr, compareItem) {
+        var flag = true;
+        for (var j = 1; j < arr.length; j++) {
+            if (!arr[j].includes(compareItem)) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    };
+    var ar3 = arr[0].split("");
+    var ar4 = [];
+    for (var i = 0; i < ar3.length; i ++) {
+        if (!ar4.length) {
+            if (canPush(arr, ar3[i])) {
+                ar4.push(ar3[i])
+            } else {
+                break;
+            }
+        } else {
+            if (canPush(arr,ar4.join('') +  ar3[i])) {
+                ar4.push(ar3[i])
+            }
+        }
+    }
+    return ar4.join("")
 };
