@@ -11,6 +11,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  // if you are test this demo, you may replace the flowing URL of importing scheme
   import scheme from '~/components/layout/scheme'
   export default {
     data() {
