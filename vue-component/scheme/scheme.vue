@@ -32,7 +32,6 @@
             v-for="(td, tdIndex) in item.columns"
             @click.prevent.stop="cellClick(item.time, td.date, index, tdIndex, isAvailable(item.time, td.date))">
           <i class="el-icon-check" v-show="td.checked"></i>
-          {{td.checked}}
         </td>
       </tr>
     </table>
@@ -79,7 +78,16 @@
     },
     props: {
       now: {
-        type: [Date]
+        type: [Date],
+        default: function () {
+          return new Date()
+        }
+      },
+      valid: {
+        type: [Array],
+        default: function () {
+          return []
+        }
       }
     },
     computed: {},
@@ -109,11 +117,13 @@
         }
       },
       isAvailable(time, date) {
-        let start = time.slice(0, time.indexOf('-'))
-        let d = date + ' ' + start
-        let spanExpected = 3 * 60 * 60 * 1000
-        let span = new Date(d) - new Date()
-        return span > spanExpected
+        // the code in comments are designed for limit the selection when the time of table cell is less than 3 hours, thus you may extend it in your case
+//        let start = time.slice(0, time.indexOf('-'))
+//        let d = date + ' ' + start
+//        let spanExpected = 3 * 60 * 60 * 1000
+//        let span = new Date(d) - new Date()
+//        return span > spanExpected
+        return this.valid.find(item => item.time === time && item.date === date)
       },
       resetChecked() {
         const tableData = this.tableData
@@ -156,6 +166,7 @@
     watch: {
       now(newVal, oldVal) {
         this.calculate(newVal)
+        this.$emit('receiveScheme', {})
       }
     }
   }

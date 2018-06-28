@@ -4,6 +4,7 @@
     <el-button @click="thisWeek">本周</el-button>
     <el-button @click="nextWeek">下周</el-button>
     <scheme :now="now"
+            :valid="validDate"
             @receiveScheme="handleScheme"
             ref="schemeRef" ></scheme>
   </div>
@@ -14,7 +15,21 @@
   export default {
     data() {
       return {
-        now: new Date()
+        now: new Date(),
+        validDate: [
+          {
+            date: '2018-06-29',
+            time: '09:30-10:30'
+          },
+          {
+            date: '2018-07-08',
+            time: '21:30-22:30'
+          },
+          {
+            date: '2018-07-08',
+            time: '09:00-10:00'
+          }
+        ]
       }
     },
     methods: {
