@@ -68,22 +68,22 @@ var isRun = {
 };
 
 var timer = new RunSeconds(isRun);
-/*$('#codeSendBtn1').click(function () {
+$('#codeSendBtn1').click(function () {
     if (!timer.isRunning) {
         timer.start();
         // you may process some async operations,like ajax,timeOut etc.
         // By the way, you can do something with the stat that the counter sample tells you;
         // For example, you want to shut the counter,when the ajax http status returns error, you can do it in the ajax callback by timer.shutdown() ,'cause the counter record the state
-        /!*setTimeout(function () {
+        /*setTimeout(function () {
             if (timer.timer) {
                 timer.shutDown();
                 $('#codeSendBtn1').text('发送验证码').attr('disabled', false)
             }
-        }, 4000)*!/
+        }, 4000)*/
     } else {
         return false
     }
-})*/
+})
 
 (function (win, doc) {
     var t = null, l, w;
