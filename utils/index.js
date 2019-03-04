@@ -167,3 +167,20 @@ var longestPrefix = function (arr) {
     }
     return ar4.join("")
 };
+
+let renderTmp = (d, h) => {
+  return d.children ? h(
+    d.tag,
+    d.config,
+    d.children.map((child, index) => {
+      if (typeof child === 'string') {
+        return child
+      } else {
+        return renderTmp(child, h)
+      }
+    })
+  ) : h(
+    d.tag,
+    d.config
+  )
+}
